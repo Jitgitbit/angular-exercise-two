@@ -1,3 +1,5 @@
+.md stands for markdown btw
+
 ng new angular-exercise-two
 
 npm install --save bootstrap@3
