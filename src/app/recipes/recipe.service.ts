@@ -32,12 +32,12 @@ export class RecipeService {
     ]),
   ];
 
-  constructor(private slService: ShoppingListService){
-    this.slService;
-  }
+  constructor(private slService: ShoppingListService){}
 
   getRecipes(){
     return this.recipes.slice();         //neat little trick: here I make an exact copy of recipes using slice without args, to avoid mutation !!!
   }
-  addIngredientsToShoppingList(ingredients: Ingredient[]){}
+  addIngredientsToShoppingList(ingredients: Ingredient[]){
+    this.slService.addIngredients(ingredients);
+  }
 }
