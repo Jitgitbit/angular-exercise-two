@@ -9,6 +9,6 @@ export class RecipeService {
   ];
 
   getRecipes(){
-    return this.recipes.slice();         //neat little trick: here I make an exact copy of recipes using slice without args, to avoid mutation !!
+    return this.recipes.slice();         //neat little trick: here I make an exact copy of recipes using slice without args, to avoid mutation !!!
   }
 }
