@@ -19,8 +19,10 @@ export class ShoppingListService {
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
   addIngredients(ingredients: Ingredient[]){
-    for(let ingredient of ingredients){
-      this.addIngredient(ingredient);                              // A viable option, but is heavy due to many events !!!
-    }
+    // for(let ingredient of ingredients){
+    //   this.addIngredient(ingredient);                              // A viable option, but is heavy due to many events !!!
+    // }
+    this.ingredients.push(...ingredients);                            // Spread Operator makes it much lighter !!!
+    this.ingredientsChanged.emit(this.ingredients.slice());
   }
 }
