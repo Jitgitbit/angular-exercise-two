@@ -37,8 +37,8 @@ export class RecipeService {
   getRecipes(){
     return this.recipes.slice();         //neat little trick: here I make an exact copy of recipes using slice without args, to avoid mutation !!!
   }
-  getRecipe(id: number){
-    return this.recipes.slice()[id];
+  getRecipe(index: number){
+    return this.recipes.slice()[index];
   }
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     this.slService.addIngredients(ingredients);
