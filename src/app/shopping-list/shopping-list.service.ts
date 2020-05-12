@@ -1,8 +1,9 @@
+import { Subject } from 'rxjs';
+
 import { Ingredient } from '../shared/ingredient.model';
-import { EventEmitter } from '@angular/core';
 
 export class ShoppingListService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
 
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -16,13 +17,13 @@ export class ShoppingListService {
   }
   addIngredient(ingredient: Ingredient){
     this.ingredients.push(ingredient);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
   addIngredients(ingredients: Ingredient[]){
     // for(let ingredient of ingredients){
     //   this.addIngredient(ingredient);                              // A viable option, but is heavy due to many events !!!
     // }
     this.ingredients.push(...ingredients);                            // Spread Operator makes it much lighter !!!
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 }
