@@ -18,21 +18,22 @@ export class RecipeService {
       new Ingredient('Guacamole', 1),
     ]),
     new Recipe('Tasty Schnitzel', 'The famous awesome german dish', 'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',[
-      new Ingredient('Turkey Meat Filet', 1),
+      new Ingredient('Turkey Filet', 1),
       new Ingredient('Chappelure', 1),
       new Ingredient('Lemon', 1),
       new Ingredient('Belgian Fries', 20),
       new Ingredient('Mustard', 1),
     ]),
-    new Recipe('Big Fat Burger', 'What else you need to say?', 'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',[
-      new Ingredient('Bacon', 3),
-      new Ingredient('Angus Beef Hamburger', 1),
-      new Ingredient('Emmenthal Cheese', 2),
-      new Ingredient('Iceberg lettuce', 1),
-      new Ingredient('Mustard', 1),
+    new Recipe('Indonesian Cuisine', 'What else you need to say?', 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Indonesian_Food.png',[
+      new Ingredient('Chicken Filet', 3),
+      new Ingredient('Eggs', 2),
+      new Ingredient('Zucchini', 2),
+      new Ingredient('Sticky Rice', 1),
+      new Ingredient('Lettuce', 1),
+      new Ingredient('Tomato', 1),
     ]),
   ];
-
+  
   constructor(private slService: ShoppingListService){}
 
   getRecipes(){
