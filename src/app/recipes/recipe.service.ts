@@ -35,7 +35,8 @@ export class RecipeService {
       new Ingredient('Tomato', 1),
     ]),
   ];
-  
+  //https://upload.wikimedia.org/wikipedia/commons/2/2a/Spaghetti_al_Pomodoro.JPG
+
   constructor(private slService: ShoppingListService){}
 
   getRecipes(){
