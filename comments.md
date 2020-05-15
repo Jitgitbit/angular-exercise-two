@@ -15,3 +15,6 @@ ng g c shopping-list --skipTests true
 ng g c shopping-list/shopping-edit --skipTests true
 ng g c recipes/recipe-start --skipTests true
 ng g c recipes/recipe-edit --skipTests true
+
+
+little bootstrap html shortcut trick:     .row>.col-xs-12     +tab
