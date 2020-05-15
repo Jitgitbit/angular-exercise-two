@@ -67,4 +67,12 @@ export class RecipeEditComponent implements OnInit {
   onSubmit(){
     console.log(`recipeForm says what?`,this.recipeForm);
   }
+  onAddIngredient(){
+    (<FormArray>this.recipeForm.get('ingredients')).push(          // Explicitely casted into a FormArray here for demanding TS !!!
+      new FormGroup({
+        'name': new FormControl(),
+        'amount': new FormControl(),
+      })
+    )
+  }
 }
