@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -27,8 +28,8 @@ export class RecipeEditComponent implements OnInit {
       (params: Params) => {
         this.id = +params['id'];
         this.editMode = params['id'] != null;                            // nice trick to check truthy or falsy here !
-        console.log(`======>>> is editMode true?`,this.editMode);
         this.initForm();
+        console.log(`======>>> is editMode true?`,this.editMode);
       }
     )
   }
@@ -67,8 +68,23 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmitAddOrUpdate(){
     console.log(`recipeForm says what?`,this.recipeForm);
+
+    const newRecipe = new Recipe(
+      this.recipeForm.value['name'],
+      this.recipeForm.value['description'],
+      this.recipeForm.value['imagePath'],
+      this.recipeForm.value['ingredients']
+    );
+
+    if(this.editMode){
+      this.recipeService.updateRecipe(this.id, newRecipe);
+      // this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+    }else{
+      this.recipeService.addRecipe(newRecipe);
+      // this.recipeService.addRecipe(this.recipeForm.value);
+    }
   }
   onAddIngredient(){
     (<FormArray>this.recipeForm.get('ingredients')).push(          // Explicitely casted into a FormArray here for demanding TS !!!
