@@ -70,20 +70,19 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmitAddOrUpdate(){
     console.log(`recipeForm says what?`,this.recipeForm);
-
-    const newRecipe = new Recipe(
-      this.recipeForm.value['name'],
-      this.recipeForm.value['description'],
-      this.recipeForm.value['imagePath'],
-      this.recipeForm.value['ingredients']
-    );
+    // const newRecipe = new Recipe(                                          // GOOD EXAMPLE OF OUR REACTIVE APPROACH:
+    //   this.recipeForm.value['name'],                                      // Since our value of the form has exactly the same format and names
+    //   this.recipeForm.value['description'],                              // as our Recipe Model, you can skip the step of saving it into a new constant
+    //   this.recipeForm.value['imagePath'],                               //  Line 82 and 85 are the way !!!
+    //   this.recipeForm.value['ingredients']
+    // );
 
     if(this.editMode){
-      this.recipeService.updateRecipe(this.id, newRecipe);
-      // this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      // this.recipeService.updateRecipe(this.id, newRecipe);
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     }else{
-      this.recipeService.addRecipe(newRecipe);
-      // this.recipeService.addRecipe(this.recipeForm.value);
+      // this.recipeService.addRecipe(newRecipe);
+      this.recipeService.addRecipe(this.recipeForm.value);
     }
   }
   onAddIngredient(){
