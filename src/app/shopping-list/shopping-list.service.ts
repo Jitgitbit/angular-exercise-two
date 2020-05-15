@@ -35,7 +35,7 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
   deleteIngredient(index: number){
-    this.ingredients.slice(index, 1 );     //------->>> using .slice for what it is made for (finally) !!!
-    this.ingredientsChanged.next(this.ingredients.slice());               //--------->> back to using .slice for making a copy ;) !
+    this.ingredients.splice(index, 1 );                          //------->>> using .splice for what it is made for !!!
+    this.ingredientsChanged.next(this.ingredients.slice());               //--------->> using .slice for making a copy, no mutations ;) !
   }
 }
