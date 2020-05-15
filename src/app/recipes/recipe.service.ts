@@ -55,4 +55,8 @@ export class RecipeService {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());         //----> this is necessary to avoid always rendering a copy of the non changed one !
   }
+  deleteRecipe(index: number){
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());         //----> this is necessary to avoid always rendering a copy of the non changed one !
+  }
 }
