@@ -53,6 +53,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       this.slService.addIngredient(newIngredient); 
     }  
     this.editMode = false;  // prevents button sticking on update after submit !
-    form.reset();  // reset after submit 
+    form.reset();  // resets textfields after submit 
+  }
+  onClear(){
+    this.slForm.reset();
+    this.editMode = false;
   }
 }
