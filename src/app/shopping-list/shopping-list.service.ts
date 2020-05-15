@@ -36,6 +36,6 @@ export class ShoppingListService {
   }
   deleteIngredient(index: number){
     this.ingredients.slice(index, 1 );     //------->>> using .slice for what it is made for (finally) !!!
-    this.ingredientsChanged.next(this.ingredients.slice())               //--------->> back to using .slice for making a copy ;) !
+    this.ingredientsChanged.next(this.ingredients.slice());               //--------->> back to using .slice for making a copy ;) !
   }
 }
