@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
@@ -20,7 +20,7 @@ export class DataStorageService {
       });
   }
   fetchRecipes(){
-    this.http
+    return this.http
       .get<Recipe[]>('https://phoenixrecipebook.firebaseio.com/recipes.json')
       .pipe(
         map(recipes => {    //----> this map is the rxjs operator
@@ -30,11 +30,11 @@ export class DataStorageService {
               ingredients: recipe.ingredients ? recipe.ingredients : []
             };
           });
-        })
+        }),
+        tap(recipes => {
+          console.log(`fetchRecipes response says what?`, recipes);
+          this.recipeService.setRecipes(recipes);
+        }) 
       )
-      .subscribe(recipes => {
-        console.log(`fetchRecipes response says what?`, recipes);
-        this.recipeService.setRecipes(recipes);
-      });
   }
 }
