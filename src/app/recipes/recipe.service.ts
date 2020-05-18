@@ -39,6 +39,10 @@ export class RecipeService {
 
   constructor(private slService: ShoppingListService){}
 
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
   getRecipes(){
     return this.recipes.slice();         //neat little trick: here I make an exact copy of recipes using slice without args, to avoid mutation !!!
   }
