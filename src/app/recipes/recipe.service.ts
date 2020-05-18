@@ -11,31 +11,39 @@ export class RecipeService {
   // recipeSelected = new Subject<Recipe>();
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe('Croissant with soft Egg', 'Very nice breakfast', 'https://p0.pikrepo.com/preview/800/706/bread-with-tomato-and-green-vegetable-on-white-ceramic-plate.jpg',[
-      new Ingredient('Egg', 1),
-      new Ingredient('Croissant', 1),
-      new Ingredient('Cherry Tomato', 2),
-      new Ingredient('Rucola', 9),
-      new Ingredient('Guacamole', 1),
-    ]),
-    new Recipe('Tasty Schnitzel', 'The famous awesome german dish', 'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',[
-      new Ingredient('Turkey Filet', 1),
-      new Ingredient('Chappelure', 1),
-      new Ingredient('Lemon', 1),
-      new Ingredient('Belgian Fries', 20),
-      new Ingredient('Mustard', 1),
-    ]),
-    new Recipe('Indonesian Cuisine', 'What else you need to say?', 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Indonesian_Food.png',[
-      new Ingredient('Chicken Filet', 3),
-      new Ingredient('Eggs', 2),
-      new Ingredient('Zucchini', 2),
-      new Ingredient('Sticky Rice', 1),
-      new Ingredient('Lettuce', 1),
-      new Ingredient('Tomato', 1),
-    ]),
-  ];
-  //https://upload.wikimedia.org/wikipedia/commons/2/2a/Spaghetti_al_Pomodoro.JPG
+  private recipes: Recipe[] = [];
+  // private recipes: Recipe[] = [
+  //   new Recipe('Croissant with soft Egg', 'Very nice breakfast.', 'https://p0.pikrepo.com/preview/800/706/bread-with-tomato-and-green-vegetable-on-white-ceramic-plate.jpg',[
+  //     new Ingredient('Egg', 1),
+  //     new Ingredient('Croissant', 1),
+  //     new Ingredient('Cherry Tomato', 2),
+  //     new Ingredient('Rucola', 9),
+  //     new Ingredient('Guacamole', 1),
+  //   ]),
+  //   new Recipe('Tasty Schnitzel', 'The famous awesome german dish.', 'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',[
+  //     new Ingredient('Turkey Filet', 1),
+  //     new Ingredient('Chappelure', 1),
+  //     new Ingredient('Lemon', 1),
+  //     new Ingredient('Belgian Fries', 20),
+  //     new Ingredient('Mustard', 1),
+  //   ]),
+  //   new Recipe('Indonesian Cuisine', 'Healthy and tasty!', 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Indonesian_Food.png',[
+  //     new Ingredient('Chicken Filet', 3),
+  //     new Ingredient('Eggs', 2),
+  //     new Ingredient('Zucchini', 2),
+  //     new Ingredient('Sticky Rice', 1),
+  //     new Ingredient('Lettuce', 1),
+  //     new Ingredient('Tomato', 1),
+  //   ]),
+  //   new Recipe('Spaghetti al Pomodoro', 'What else you need to say?', 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Spaghetti_al_Pomodoro.JPG',[
+  //     new Ingredient('Spaghetti', 100),
+  //     new Ingredient('Parmeggiano Cheese', 2),
+  //     new Ingredient('Garlic', 2),
+  //     new Ingredient('Oregano', 1),
+  //     new Ingredient('Basilicum', 13),
+  //     new Ingredient('Tomato', 7),
+  //   ]),
+  // ];
 
   constructor(private slService: ShoppingListService){}
 
