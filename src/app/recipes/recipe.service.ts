@@ -43,6 +43,16 @@ export class RecipeService {
   //     new Ingredient('Basilicum', 13),
   //     new Ingredient('Tomato', 7),
   //   ]),
+  //   new Recipe('Summer Salad', 'A refreshing dish', 'https://www.maxpixel.net/static/photo/1x/Salad-Summer-Salad-Eat-Saltattelier-843085.jpg',[
+  //     new Ingredient('Parsley', 2),
+  //     new Ingredient('Orange', 1),
+  //     new Ingredient('Mint', 1),
+  //     new Ingredient('Eggplant', 1),
+  //     new Ingredient('Chicory', 1),
+  //     new Ingredient('Tomato', 3),
+  //     new Ingredient('Cucumber', 1),
+  //     new Ingredient('Pinapple', 1),
+  //   ]),
   // ];
 
   constructor(private slService: ShoppingListService){}
