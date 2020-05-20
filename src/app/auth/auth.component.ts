@@ -36,9 +36,13 @@ export class AuthComponent {
       this.authService.signup(email, password).subscribe(resData => {
         console.log(`AuthService signup resData says what?`, resData);
         this.isLoading = false;
-      }, error => {
-        console.log(`error at signup:`,error);
-        this.error = 'An Error occurred!';
+      }, 
+      errorRes => {
+        console.log(`error at signup:`, errorRes);
+        switch(errorRes.error.error.message) {
+          case 'EMAIL_EXISTS':
+            this.error = 'This email has already been registered for a user!';
+        }
         this.isLoading = false;
       });
     }
