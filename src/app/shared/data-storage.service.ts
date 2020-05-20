@@ -23,28 +23,21 @@ export class DataStorageService {
       });
   }
   fetchRecipes() {
-    return this.authService.user.pipe(
-      take(1),                                               //----> here take will take 1 value from the observable, and then unsubscribe !
-      exhaustMap((user) => {
-        return this.http.get<Recipe[]>(
-          'https://phoenixrecipebook.firebaseio.com/recipes.json',
-          {
-            params: new HttpParams().set('auth', user.token),
-          }
-        );
-      }),
-      map((recipes) => {                                      //----> this map is the rxjs operator
-        return recipes.map((recipe) => {                          //----> this map is the normal JS ArrayMethod
-          return {
-            ...recipe,
-            ingredients: recipe.ingredients ? recipe.ingredients : [],
-          };
-        });
-      }),
-      tap((recipes) => {
-        console.log(`fetchRecipes response says what?`, recipes);
-        this.recipeService.setRecipes(recipes);
-      })
-    );
+    return this.http
+      .get<Recipe[]>('https://phoenixrecipebook.firebaseio.com/recipes.json')
+      .pipe(
+        map((recipes) => {                             //----> this map is the rxjs operator
+          return recipes.map((recipe) => {                   //----> this map is the normal JS ArrayMethod
+            return {
+              ...recipe,
+              ingredients: recipe.ingredients ? recipe.ingredients : [],
+            };
+          });
+        }),
+        tap((recipes) => {
+          console.log(`fetchRecipes response says what?`, recipes);
+          this.recipeService.setRecipes(recipes);
+        })
+      );
   }
 }
