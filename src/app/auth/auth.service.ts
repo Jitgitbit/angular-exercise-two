@@ -76,4 +76,8 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
+
+  logout(){
+    this.user.next(null);
+  }
 }
