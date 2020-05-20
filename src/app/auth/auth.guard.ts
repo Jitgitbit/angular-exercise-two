@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
-      take(1),                                       //---> we want to listen only once , save on performance loss !
+      take(1),                                       //---> we want to listen only once , save on performance loss, and nasty bugs rerunning the guard !
       map((user) => {
         const isAuth = !!user;
         if (isAuth) {
