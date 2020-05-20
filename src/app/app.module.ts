@@ -44,7 +44,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     HttpClientModule,
     AppRoutingModule,  //this one is custom-made
   ],
-  providers: [ShoppingListService, RecipeService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService}],
+  providers: [ShoppingListService, RecipeService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
