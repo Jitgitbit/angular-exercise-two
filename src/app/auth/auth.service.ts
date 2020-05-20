@@ -10,6 +10,7 @@ interface AuthResponseData {
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered?: boolean;                      //--> only for login, thus it is optional with ? sign
 }
 
 @Injectable({providedIn: 'root'})
@@ -40,4 +41,15 @@ export class AuthService {
       }
     ));
   };
+  login(email: string, password: string){
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAciAldHViHThHcqsJ_wjQ6qLNMO06zQv4',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }
+    )
+  }
+
 }

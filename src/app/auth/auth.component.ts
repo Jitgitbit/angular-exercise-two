@@ -31,7 +31,15 @@ export class AuthComponent {
 
     this.isLoading = true;
     if(this.isLoginMode){
-      //...
+      this.authService.login(email, password).subscribe(resData => {
+        console.log(`AuthService login resData says what?`, resData);
+        this.isLoading = false;
+      }, 
+      errorMessage => {
+        console.log(`error at login:`, errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+      });
     }else{
       this.authService.signup(email, password).subscribe(resData => {
         console.log(`AuthService signup resData says what?`, resData);
