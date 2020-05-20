@@ -23,41 +23,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router){}
 
-  signup(email: string, password: string){
-    return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAciAldHViHThHcqsJ_wjQ6qLNMO06zQv4',
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      }
-    ).pipe(catchError(this.handleError), tap(resData => {
-      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-    }));
-  };
-
   private handleAuthentication(email: string, userId: string, token: string, expiresIn: number){
 
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-
     const user = new User(email, userId, token, expirationDate);
-
     this.user.next(user);
-
     localStorage.setItem('userData', JSON.stringify(user));
-  }
-
-  login(email: string, password: string){
-    return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAciAldHViHThHcqsJ_wjQ6qLNMO06zQv4',
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      }
-    ).pipe(catchError(this.handleError), tap(resData => {
-      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-    }));
   }
 
   private handleError(errorRes: HttpErrorResponse){
@@ -78,6 +49,55 @@ export class AuthService {
         break;
     }
     return throwError(errorMessage);
+  }
+
+  signup(email: string, password: string){
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAciAldHViHThHcqsJ_wjQ6qLNMO06zQv4',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }
+    ).pipe(catchError(this.handleError), tap(resData => {
+      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+    }));
+  };
+
+  login(email: string, password: string){
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAciAldHViHThHcqsJ_wjQ6qLNMO06zQv4',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }
+    ).pipe(catchError(this.handleError), tap(resData => {
+      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+    }));
+  }
+
+  autoLogin(){
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if(!userData){
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+    }
   }
 
   logout(){
