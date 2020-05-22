@@ -27,3 +27,5 @@ little bootstrap html shortcut trick:     .row>.col-xs-12     +tab
 }
 
 ng build --prod
+
+firebase login
