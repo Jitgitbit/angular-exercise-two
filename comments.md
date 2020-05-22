@@ -25,3 +25,5 @@ little bootstrap html shortcut trick:     .row>.col-xs-12     +tab
     ".write": true
   }
 }
+
+ng build --prod
