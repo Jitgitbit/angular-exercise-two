@@ -29,3 +29,13 @@ little bootstrap html shortcut trick:     .row>.col-xs-12     +tab
 ng build --prod
 
 firebase login
+firebase init
+hosting only
+
+dist/angular-exercise-two
+y          (spa)
+n           (overwrite?)
+
+firebase deploy
+
+https://phoenixrecipebook.web.app
