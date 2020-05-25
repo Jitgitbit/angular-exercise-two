@@ -39,3 +39,5 @@ n           (overwrite?)
 firebase deploy
 
 https://phoenixrecipebook.web.app
+
+npm install --save @ngrx/store
