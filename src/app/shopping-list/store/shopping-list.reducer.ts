@@ -25,7 +25,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
     case ShoppingListActions.ADD_INGREDIENTS:
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload]
+        ingredients: [...state.ingredients, ...action.payload]         //----> using a spread operator, otherwise you would have a nested array !
       };
     default:
       return state;
