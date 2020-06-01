@@ -15,31 +15,26 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router) { }
+
+  ngOnInit(): void {
+    const id = this.route.params.subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.recipe = this.recipeService.getRecipe(this.id); 
+      }
+    );
   }
 
-  ngOnInit() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = +params['id'];
-          this.recipe = this.recipeService.getRecipe(this.id);
-        }
-      );
+  onAddToShoppingList(){
+    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients)
   }
-
-  onAddToShoppingList() {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+  onEditRecipe(){
+    // this.router.navigate(['edit'], {relativeTo: this.route});                   //===> This works as well, actually the id is not needed here !!!
+    this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});     //===> But this is nice to have, for later more complex routing !
   }
-
-  onEditRecipe() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
-    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
-  }
-
-  onDeleteRecipe() {
+  onDeleteRecipe(){
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['/recipes']);
   }
-
 }

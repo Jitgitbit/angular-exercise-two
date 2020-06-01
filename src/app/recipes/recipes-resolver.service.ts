@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
-import {
-  Resolve,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot
-} from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Recipe } from './recipe.model';
 import { DataStorageService } from '../shared/data-storage.service';
 import { RecipeService } from './recipe.service';
 
-@Injectable({ providedIn: 'root' })
-export class RecipesResolverService implements Resolve<Recipe[]> {
+@Injectable({providedIn: 'root'})
+export class RecipesResolver implements Resolve<Recipe[]>{
   constructor(
-    private dataStorageService: DataStorageService,
-    private recipesService: RecipeService
-  ) {}
+    private dataStorageService: DataStorageService, 
+    private recipeService: RecipeService
+  ){}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const recipes = this.recipesService.getRecipes();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+    const recipes = this.recipeService.getRecipes();
 
-    if (recipes.length === 0) {
+    if(recipes.length === 0){
       return this.dataStorageService.fetchRecipes();
-    } else {
+    }else{
       return recipes;
     }
   }
