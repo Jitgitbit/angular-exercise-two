@@ -6,35 +6,38 @@ import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  collapsed = true;
-  private userSub: Subscription;
   isAuthenticated = false;
+  private userSub: Subscription;
 
-  constructor(private dataStorageService: DataStorageService, private authService: AuthService) {}
+  constructor(
+    private dataStorageService: DataStorageService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
-      // this.isAuthenticated = !user ? false : true; 
-      this.isAuthenticated = !!user;                              //---> very short syntax ! means exactly the same as line above !
-      console.log('=====>> !user says what?', !user);
-      console.log('=======>>> !!user says what?', !!user);
+      this.isAuthenticated = !!user;
+      console.log(!user);
+      console.log(!!user);
     });
   }
-  ngOnDestroy(){
-    this.userSub.unsubscribe();
-  }
 
-  onSaveData(){
+  onSaveData() {
     this.dataStorageService.storeRecipes();
   }
-  onFetchData(){
+
+  onFetchData() {
     this.dataStorageService.fetchRecipes().subscribe();
   }
-  onLogout(){
+
+  onLogout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }

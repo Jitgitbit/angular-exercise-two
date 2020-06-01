@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
-
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -16,22 +15,25 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private recipeService: RecipeService,
-              private router : Router,
-              private route: ActivatedRoute) { }
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
 
-  ngOnInit(): void {
-    this.subscription = this.recipeService.recipesChanged.subscribe(
-      (recipes: Recipe[]) => {
-        this.recipes = recipes;
-      }
-    );
+  ngOnInit() {
+    this.subscription = this.recipeService.recipesChanged
+      .subscribe(
+        (recipes: Recipe[]) => {
+          this.recipes = recipes;
+        }
+      );
     this.recipes = this.recipeService.getRecipes();
   }
-  ngOnDestroy(){
-    this.subscription.unsubscribe();             //----------> ALWAYS DO THIS TO AVOID MEMORY LEAKS !!! DO IT WITH EACH SUBSCRIPTION !!!
+
+  onNewRecipe() {
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
-  onNewRecipe(){
-    this.router.navigate(['new'], {relativeTo: this.route});
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
