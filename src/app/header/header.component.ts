@@ -1,40 +1,50 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
+import * as fromApp from '../store/app.reducer';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  collapsed = true;
-  private userSub: Subscription;
   isAuthenticated = false;
+  private userSub: Subscription;
 
-  constructor(private dataStorageService: DataStorageService, private authService: AuthService) {}
+  constructor(
+    private dataStorageService: DataStorageService,
+    private authService: AuthService,
+    private store: Store<fromApp.AppState>
+  ) {}
 
-  ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe(user => {
-      // this.isAuthenticated = !user ? false : true; 
-      this.isAuthenticated = !!user;                              //---> very short syntax ! means exactly the same as line above !
-      console.log('=====>> !user says what?', !user);
-      console.log('=======>>> !!user says what?', !!user);
-    });
+  ngOnInit() {
+    this.userSub = this.store
+      .select('auth')
+      .pipe(map(authState => authState.user))
+      .subscribe(user => {
+        this.isAuthenticated = !!user;
+        console.log(!user);
+        console.log(!!user);
+      });
   }
-  ngOnDestroy(){
-    this.userSub.unsubscribe();
-  }
 
-  onSaveData(){
+  onSaveData() {
     this.dataStorageService.storeRecipes();
   }
-  onFetchData(){
+
+  onFetchData() {
     this.dataStorageService.fetchRecipes().subscribe();
   }
-  onLogout(){
+
+  onLogout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }
