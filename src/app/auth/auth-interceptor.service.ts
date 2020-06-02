@@ -17,7 +17,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.store.select('auth').pipe(
-      take(1),
+      take(1),                                  // So, this will then only take the first one !
       map(authState => {
         return authState.user;
       }),
