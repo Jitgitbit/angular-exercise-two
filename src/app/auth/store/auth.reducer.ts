@@ -13,6 +13,7 @@ export function authReducer(
   state = initialState,
   action: AuthActions.AuthActions
 ) {
+  console.log(`State in auth says what?(do something in shoppingList): `, state);
   switch (action.type) {
     case AuthActions.LOGIN:
       const user = new User(
