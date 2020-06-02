@@ -42,3 +42,12 @@ https://phoenixrecipebook.web.app
 
 npm install --save @ngrx/store
 npm install --save @ngrx/effects
+____________________________________________________________________
+NOTE:
+for making sure all is well protecting the environments folder:
+add a line in .gitignore saying: environments/
+git rm -r --cached src/environments
+git add .
+git commit -m 'Removed the now ignored directory "some-directory"'
+git push origin master
+_____________________________________________________________________
