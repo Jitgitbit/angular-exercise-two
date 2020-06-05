@@ -51,3 +51,5 @@ git add .
 git commit -m 'Removed the now ignored directory "some-directory"'
 git push origin master
 _____________________________________________________________________
+
+npm install --save-dev @ngrx/store-devtools            (---<> with this we can use our redux tool in the browser!)
