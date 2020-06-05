@@ -12,7 +12,7 @@ export class RecipeEffects {
   fetchRecipes = this.actions$.pipe(
     ofType(RecipesActions.FETCH_RECIPES),
     switchMap(() => {
-      return this.http.get<Recipe[]>(
+      return this.http.get<Recipe[]>(                                   //===> of great use to the resolver !
         'https://phoenixrecipebook.firebaseio.com/recipes.json'
       );
     }),
