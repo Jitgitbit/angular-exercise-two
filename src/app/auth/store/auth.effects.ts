@@ -160,7 +160,7 @@ export class AuthEffects {
         //   new Date().getTime();
         // this.autoLogout(expirationDuration);
       }
-      return { type: 'DUMMY' };                      
+      return { type: 'DUMMY' };                        //----> it just can't be null, actually a handy trick !               
     })
   );
 
