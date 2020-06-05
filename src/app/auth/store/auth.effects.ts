@@ -136,7 +136,7 @@ export class AuthEffects {
         _tokenExpirationDate: string;
       } = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
-        return { type: 'DUMMY' };
+        return { type: 'DUMMY' };                            //----> it just can't be null, actually a handy trick !    
       }
 
       const loadedUser = new User(
