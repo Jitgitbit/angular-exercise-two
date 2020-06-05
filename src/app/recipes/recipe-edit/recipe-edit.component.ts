@@ -36,7 +36,7 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmitAddOrUpdate() {
     console.log(`recipeForm says what?`,this.recipeForm);
     // const newRecipe = new Recipe(                                          // GOOD EXAMPLE OF OUR REACTIVE APPROACH:
     //   this.recipeForm.value['name'],                                      // Since our value of the form has exactly the same format and names
@@ -48,7 +48,7 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
-    this.onCancel();
+    this.onCancelAndOrRedirectBack();
   }
 
   onAddIngredient() {
@@ -67,7 +67,7 @@ export class RecipeEditComponent implements OnInit {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
-  onCancel() {
+  onCancelAndOrRedirectBack() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
