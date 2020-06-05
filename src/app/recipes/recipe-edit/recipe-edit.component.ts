@@ -20,7 +20,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   private storeSub: Subscription;
 
-  get ingredientsControls() {                                                    // a getter! Sometimes Angular doesn't understand TS
+  get ingredientsControls() {
     return (this.recipeForm.get('ingredients') as FormArray).controls;
   }
 
@@ -33,16 +33,16 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-      this.editMode = params['id'] != null;                                        // nice trick to check truthy or falsy here !
+      this.editMode = params['id'] != null;                         // nice trick to check truthy or falsy here !
       this.initForm();
     });
   }
 
   onSubmitAddOrUpdate() {
     console.log(`recipeForm says what?`,this.recipeForm);
-    // const newRecipe = new Recipe(                                           // GOOD EXAMPLE OF OUR REACTIVE APPROACH:
-    //   this.recipeForm.value['name'],                                       // Since our value of the form has exactly the same format and names
-    //   this.recipeForm.value['description'],                               // as our Recipe Model, you can skip the step of saving it into a new constant !
+    // const newRecipe = new Recipe(                                             // GOOD EXAMPLE OF OUR REACTIVE APPROACH:
+    //   this.recipeForm.value['name'],                                         // Since our value of the form has exactly the same format and names
+    //   this.recipeForm.value['description'],                                 // as our Recipe Model, you can skip the step of saving it into a new constant!
     //   this.recipeForm.value['imagePath'],
     //   this.recipeForm.value['ingredients']);
     if (this.editMode) {
@@ -61,12 +61,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   onAddIngredient() {
-    (<FormArray>this.recipeForm.get('ingredients')).push(                 // Explicitely casted into a FormArray here for demanding TS !!!
+    (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
         name: new FormControl(null, Validators.required),
         amount: new FormControl(null, [
           Validators.required,
-          Validators.pattern(/^[1-9]+[0-9]*$/)                      // YEEY!! RegEx again !!
+          Validators.pattern(/^[1-9]+[0-9]*$/)
         ])
       })
     );
@@ -114,7 +114,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
                   name: new FormControl(ingredient.name, Validators.required),
                   amount: new FormControl(ingredient.amount, [
                     Validators.required,
-                    Validators.pattern(/^[1-9]+[0-9]*$/)                                      // YEEY!! RegEx again !!
+                    Validators.pattern(/^[1-9]+[0-9]*$/)
                   ])
                 })
               );
