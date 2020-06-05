@@ -33,7 +33,8 @@ const handleAuthentication = (
     email: email,
     userId: userId,
     token: token,
-    expirationDate: expirationDate
+    expirationDate: expirationDate,
+    redirect: true
   });
 };
 
@@ -59,7 +60,7 @@ const handleError = (errorRes: any) => {
 @Injectable()
 export class AuthEffects {
   @Effect()
-  authSignup = this.actions$.pipe(                              //------> $ sign is just a convention to put it after every Observable, especially for the actions.
+  authSignup = this.actions$.pipe(                        //------> $ sign is just a convention to put it after every Observable, especially for the actions.
     ofType(AuthActions.SIGNUP_START),
     switchMap((signupAction: AuthActions.SignupStart) => {
       return this.http
@@ -127,8 +128,10 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   authRedirect = this.actions$.pipe(
     ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap(() => {
-      this.router.navigate(['/']);
+    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+      if (authSuccessAction.payload.redirect) {
+        this.router.navigate(['/']);
+      }
     })
   );
 
@@ -143,7 +146,7 @@ export class AuthEffects {
         _tokenExpirationDate: string;
       } = JSON.parse(localStorage.getItem('userData'));
       if (!userData) {
-        return { type: 'DUMMY' };                             //----> it just can't be null, actually a handy trick !
+        return { type: 'DUMMY' };                                 //----> it just can't be null, actually a handy trick !
       }
 
       const loadedUser = new User(
@@ -163,7 +166,8 @@ export class AuthEffects {
           email: loadedUser.email,
           userId: loadedUser.id,
           token: loadedUser.token,
-          expirationDate: new Date(userData._tokenExpirationDate)
+          expirationDate: new Date(userData._tokenExpirationDate),
+          redirect: false
         });
 
         // const expirationDuration =
@@ -171,7 +175,7 @@ export class AuthEffects {
         //   new Date().getTime();
         // this.autoLogout(expirationDuration);
       }
-      return { type: 'DUMMY' };                                 //----> it just can't be null, actually a handy trick !
+      return { type: 'DUMMY' };                                      //----> it just can't be null, actually a handy trick !
     })
   );
 
