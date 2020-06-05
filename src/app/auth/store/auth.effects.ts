@@ -160,7 +160,7 @@ export class AuthEffects {
         //   new Date().getTime();
         // this.autoLogout(expirationDuration);
       }
-      return { type: 'DUMMY' };
+      return { type: 'DUMMY' };                      
     })
   );
 
