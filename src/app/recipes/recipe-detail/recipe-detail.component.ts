@@ -6,6 +6,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import * as fromApp from '../../store/app.reducer';
+import * as RecipesActions from '../store/recipe.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -49,12 +50,13 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onEditRecipe() {
-    // this.router.navigate(['edit'], { relativeTo: this.route });                   //===> This works as well, actually the id is not needed here !!!
-    this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});       //===> But this is nice to have, for later more complex routing !
+    // this.router.navigate(['edit'], { relativeTo: this.route });                         //===> This works as well, actually the id is not needed here !!!
+    this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});             //===> But this is nice to have, for later more complex routing !
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
+    // this.recipeService.deleteRecipe(this.id);
+    this.store.dispatch(new RecipesActions.DeleteRecipe(this.id));
     this.router.navigate(['/recipes']);
   }
 }
