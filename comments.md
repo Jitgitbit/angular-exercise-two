@@ -53,3 +53,5 @@ git push origin master
 _____________________________________________________________________
 
 npm install --save-dev @ngrx/store-devtools            (---<> with this we can use our redux tool in the browser!)
+
+npm install --save @ngrx/router-store
