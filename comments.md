@@ -57,3 +57,7 @@ npm install --save-dev @ngrx/store-devtools            (---<> with this we can u
 npm install --save @ngrx/router-store
 
 firebase deploy
+
+played around with Angular Universal, but changed my mind:
+git reset --hard 0ad5a7a6
+git push -f origin master   (---> forcing it on github)
